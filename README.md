@@ -12,6 +12,7 @@ Please download the version suitable for your system from the links below. Each 
 
 | **Version**      | **Source Code**                                                                                      | **Windows**                                                                                   | **Linux**                                                                                   |
 |------------------|------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| **Chrome 131**   | [131.0.6778.264](https://github.com/adryfish/fingerprint-chromium/releases/tag/131.0.6778.264)               | | [ 131.0.6778.264-1_linux.tar.xz ](https://github.com/adryfish/fingerprint-chromium/releases/download/131.0.6778.264/ungoogled-chromium_131.0.6778.264-1_linux.tar.xz) |
 | **Chrome 130**   | [130.0.6723.116](https://github.com/adryfish/fingerprint-chromium/tree/130.0.6723.116)               | [Installer](https://github.com/adryfish/fingerprint-chromium/releases/download/130.0.6723.116/ungoogled-chromium_130.0.6723.116-1.1_installer_x64.exe) <br> [ZIP](https://github.com/adryfish/fingerprint-chromium/releases/download/130.0.6723.116/ungoogled-chromium_130.0.6723.116-1.1_windows_x64.zip) | [130.0.6723.116-1_linux.tar.xz](https://github.com/adryfish/fingerprint-chromium/releases/download/130.0.6723.116/ungoogled-chromium_130.0.6723.116-1_linux.tar.xz) |
 | **Chrome 129**   | [129.0.6668.100](https://github.com/adryfish/fingerprint-chromium/tree/129.0.6668.100)               | [Installer](https://github.com/adryfish/fingerprint-chromium/releases/download/129.0.6668.100/ungoogled-chromium_129.0.6668.100-1.1_installer_x64.exe) <br> [ZIP](https://github.com/adryfish/fingerprint-chromium/releases/download/129.0.6668.100/ungoogled-chromium_129.0.6668.100-1.1_windows_x64.zip) | [129.0.6668.100-1_linux.tar.xz](https://github.com/adryfish/fingerprint-chromium/releases/download/129.0.6668.100/ungoogled-chromium_129.0.6668.100-1_linux.tar.xz) |
 
@@ -23,6 +24,19 @@ You can find the compiled versions for each major Chromium release on the GitHub
 
 Refer to the [`ungoogled-chromium`](https://github.com/ungoogled-software/ungoogled-chromium/blob/master/docs/building.md) documentation. Simply replace the `ungoogled-chromium` submodule URL with the `fingerprint-browser` repository URL.
 
+## 📢 Advertisement for Chinese Users
+
+<div style="border: 2px solid #f39c12; padding: 15px; background-color: #fffbe6; border-radius: 10px;">
+
+<b>🌟 EasyChat - Claude Mirror Site</b>
+
+A convenient platform for Chinese users to access Claude's AI services: no registration, direct access, and free to use.
+
+🔗 **Visit now**: [https://easychat.top](https://easychat.top)
+
+</div>
+
+
 ---
 
 ## Features
@@ -31,7 +45,7 @@ Refer to the [`ungoogled-chromium`](https://github.com/ungoogled-software/ungoog
 
 | **Fingerprint**                 | **Description**                                                                                          | **Command Line Arguments**                                                      |
 |-----------------------------------------|----------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
-| **User-Agent**                          | Modify the browser's `User-Agent`, including `navigator.userAgent`, `navigator.platform`, `navigator.userAgentData`, and Client Hints | `--fingerprint-platform` <br>`--fingerprint-platform-version`                  |
+| **User-Agent**                          | Modify the browser's `User-Agent`, including `navigator.userAgent`, `navigator.platform`, `navigator.userAgentData`, and `Client Hints` | `--fingerprint-platform` <br>`--fingerprint-platform-version` <br>`--fingerprint-brand`(131+) <br>`--fingerprint-brand-version`(131+)                  |
 | **Audio**                | Obfuscate or spoof audio fingerprint data                                                                | `--fingerprint` (activated when fingerprint seed is enabled)                    |
 | **Plugin**               | Modify plugin-related features                                                                           | `--fingerprint` (activated when fingerprint seed is enabled)                    |
 | **Hardware**             | Customize hardware parameters such as CPU cores and memory size                                          | `--fingerprint` <br> `--fingerprint-hardware-concurrency`                       |
@@ -66,12 +80,28 @@ You can enable or customize fingerprinting and privacy protection features by pa
 | **`--fingerprint`**                        | Specify the fingerprint seed (seed). Most fingerprint features are activated when this is set.   |
 | **`--fingerprint-platform`**               | Specify the operating system type: `windows`, `linux`, or `macos`.                              |
 | **`--fingerprint-platform-version`**       | Specify the operating system version. Defaults to the browser's default version if unspecified. |
+| **`--fingerprint-brand`**                  | Specify the browser brand in `User-Agent`.                                                      |
+| **`--fingerprint-brand-version`**          | Specify the version for the specified browser brand.                                            |
 | **`--fingerprint-hardware-concurrency`**   | Specify the number of CPU cores. If unspecified, this is randomly generated based on the seed.  |
 | **`--fingerprinting-canvas-image-data-noise`** | Enable canvas image data noise to interfere with fingerprinting.                                |
 | **`--fingerprinting-canvas-measuretext-noise`** | Enable proportional scaling noise for canvas `measureText()` fingerprints.                     |
 | **`--fingerprinting-client-rects-noise`**  | Enable proportional scaling noise for `getClientRects()` and `getBoundingClientRect()`.         |
 | **`--disable-non-proxied-udp`**            | Specify WebRTC policy. Default: disable non-proxied UDP connections (recommended to leave unset).|
 | **`--lang`** <br> **`--accept-lang`**      | Set the browser language.                                                                       |
+
+### **New Command Line Arguments for User-Agent Customization**
+
+Chrome 131 introduces two new command line arguments for advanced customization of `User-Agent` and `User-Agent Data`:
+
+- **`--fingerprint-brand`**
+  - Specifies the browser brand for `User-Agent` and `User-Agent Data`.
+  - Supported values: `Chrome`, `Edge`, `Opera`, `Vivaldi`, or a custom brand name.
+
+- **`--fingerprint-brand-version`**
+  - Specifies the version number for the specified brand.
+  - Defaults exist for `Chrome`, `Edge`, `Opera`, and `Vivaldi`, but you can provide custom versions.
+
+These arguments enhance browser environment simulation for automation and testing. If `--fingerprint-brand` is omitted, the default brand is used.
 
 ## Credits
 

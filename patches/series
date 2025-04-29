@@ -110,3 +110,15 @@ extra/ungoogled-chromium/enable-extra-locales.patch
 extra/ungoogled-chromium/disable-chromelabs.patch
 extra/ungoogled-chromium/remove-pac-size-limit.patch
 extra/ungoogled-chromium/add-flag-to-spoof-webgl-renderer-info.patch
+
+extra/fingerprint/000-add-fingerprint-switches.patch
+extra/fingerprint/001-disable-runtime.enable.patch
+extra/fingerprint/002-user-agent-fingerprint.patch
+extra/fingerprint/004-plugin-fingerprint.patch
+extra/fingerprint/005-hardware-concurrency-fingerprint.patch
+extra/fingerprint/006-font-fingerprint.patch
+extra/fingerprint/007-shadow-root.patch
+extra/fingerprint/008-fix-client-rects-and-canvas-fingerprint.patch
+extra/fingerprint/009-webdriver.patch
+extra/fingerprint/010-headless.patch
+extra/fingerprint/011-gpu-info.patch

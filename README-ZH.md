@@ -9,6 +9,7 @@
 
 | **版本**        | **源码**                                                                                   | **Windows**                                                                                   | **Linux**                                                                                   | **MacOS**     |
 |------------------|--------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------| ---------------------------------------------------------------------------------------------|
+| **Chrome 134**   | [134.0.6998.165](https://github.com/adryfish/fingerprint-chromium/tree/134.0.6998.165)               | [安装包](https://github.com/adryfish/fingerprint-chromium/releases/download/134.0.6998.165/ungoogled-chromium_134.0.6998.165-1.1_installer_x64.exe) <br> [ZIP](https://github.com/adryfish/fingerprint-chromium/releases/download/134.0.6998.165/ungoogled-chromium_134.0.6998.165-1.1_windows_x64.zip) | [ 134.0.6998.165-1_linux.tar.xz ](https://github.com/adryfish/fingerprint-chromium/releases/download/134.0.6998.165/ungoogled-chromium_134.0.6998.165-1_linux.tar.xz) |  |
 | **Chrome 133**   | [133.0.6943.126](https://github.com/adryfish/fingerprint-chromium/tree/133.0.6943.126)               | [安装包](https://github.com/adryfish/fingerprint-chromium/releases/download/133.0.6943.126/ungoogled-chromium_133.0.6943.126-1.1_installer_x64.exe) <br> [ZIP](https://github.com/adryfish/fingerprint-chromium/releases/download/133.0.6943.126/ungoogled-chromium_133.0.6943.126-1.1_windows_x64.zip) | [ 133.0.6943.126-1_linux.tar.xz ](https://github.com/adryfish/fingerprint-chromium/releases/download/133.0.6943.126/ungoogled-chromium_133.0.6943.126-1_linux.tar.xz) |  |
 | **Chrome 132**   | [132.0.6834.159](https://github.com/adryfish/fingerprint-chromium/tree/132.0.6834.159)               | [安装包](https://github.com/adryfish/fingerprint-chromium/releases/download/132.0.6834.159/ungoogled-chromium_132.0.6834.159-1.1_installer_x64.exe) <br> [ZIP](https://github.com/adryfish/fingerprint-chromium/releases/download/132.0.6834.159/ungoogled-chromium_132.0.6834.159-1.1_windows_x64.zip) | [ 132.0.6834.159-1_linux.tar.xz ](https://github.com/adryfish/fingerprint-chromium/releases/download/132.0.6834.159/ungoogled-chromium_132.0.6834.159-1_linux.tar.xz) | [132.0.6834.110-1.1_macos.dmg](https://github.com/adryfish/fingerprint-chromium/releases/download/132.0.6834.159/ungoogled-chromium_132.0.6834.110-1.1_macos.dmg) |
 
@@ -47,14 +48,15 @@
 
 | **指纹特性**                          | **描述**                                                                                     | **命令行参数**                                                                 |
 |--------------------------------------|----------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------|
-| **User-Agent**                       | 修改浏览器的 `User-Agent` 信息，包括 `navigator.userAgent`、`navigator.platform`、`navigator.userAgentData` 和 `Client Hints` | `--fingerprint-platform` <br>`--fingerprint-platform-version` <br>`--fingerprint-brand`(131+) <br>`--fingerprint-brand-version`(131+) |
+| **User-Agent**                       | 修改浏览器的 `User-Agent` 信息，包括 `navigator.userAgent`、`navigator.platform`、`navigator.userAgentData` 和 `Client Hints` | `--fingerprint-platform` <br>`--fingerprint-platform-version` <br>`--fingerprint-brand` <br>`--fingerprint-brand-version` |
 | **音频指纹**                         | 干扰或伪造音频指纹数据                                                                       | `--fingerprint`（启用指纹种子后生效）                                           |
 | **插件指纹**                         | 修改插件相关特征                                                                              | 133+去除，浏览器会返回固定的插件列表,伪装反而会暴露 |
 | **硬件指纹**                         | 自定义硬件参数，包括 CPU 核心数和内存大小                                                     | `--fingerprint` <br> `--fingerprint-hardware-concurrency` |
+| **GPU Report**                         | 修改GPU供应商和显卡型号(暂时只支持Linux) | `--fingerprint`（启用指纹种子后生效） |
 | **字体指纹**                         | 修改系统字体信息                                                                              | `--fingerprint`（启用指纹种子后生效）                                           |
-| **Canvas 图像数据噪声**               | 在 Canvas 图像数据中添加噪声，最多修改 10 个像素，干扰指纹生成                                | `--fingerprint`(132+生效)                                        |
-| **Canvas 测量文本噪声**               | 对 `Canvas::measureText()` 输出值进行比例缩放，随机因子范围为 `-0.0003%` 到 `0.0003%`，每次文档初始化时重新计算 |  `--fingerprint`(132+生效)                                      |
-| **ClientRects 噪声**                  | 对 `getClientRects()` 和 `getBoundingClientRect()` 输出值进行比例缩放，随机因子范围为 `-0.0003%` 到 `0.0003%`，每次文档初始化时重新计算 |  `--fingerprint`(132+生效)                                          |
+| **Canvas 图像数据噪声**               | 在 Canvas 图像数据中添加噪声，最多修改 10 个像素，干扰指纹生成                                | `--fingerprint`                                        |
+| **Canvas 测量文本噪声**               | 对 `Canvas::measureText()` 输出值进行比例缩放，随机因子范围为 `-0.0003%` 到 `0.0003%`，每次文档初始化时重新计算 |  `--fingerprint`                                      |
+| **ClientRects 噪声**                  | 对 `getClientRects()` 和 `getBoundingClientRect()` 输出值进行比例缩放，随机因子范围为 `-0.0003%` 到 `0.0003%`，每次文档初始化时重新计算 |  `--fingerprint`                                          |
 | **WebRTC 策略**                       | 默认禁用非代理 UDP 连接，防止通过 WebRTC 泄露真实 IP 地址                                     | `--disable-non-proxied-udp`（默认启用）                                           |
 | **语言支持**                         | 设置浏览器的语言和接受的语言                                                                  | `--lang`（设置浏览器语言）<br> `--accept-lang`（设置接受语言）                     |
 | **时区支持**                         | 设置浏览器时区                                                                              | `TZ` 环境变量（设置时区，例如 `TZ=Asia/Shanghai`）                              |
@@ -125,7 +127,7 @@ chrome.exe --fingerprint=2023 --fingerprint-platform=macos --fingerprint-platfor
 
 扫码加入QQ群与其他用户交流：
 
-<img src="qqgroup.png" alt="QQ群二维码" width="300">
+<img src="qq-group.png" alt="QQ群二维码" width="300">
 
 ## Credits
 

@@ -12,6 +12,7 @@ Please download the version suitable for your system from the links below. Each 
 
 | **Version**      | **Source Code**                                                                                      | **Windows**                                                                                   | **Linux** | **MacOS**                                                                                   |
 |------------------|------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| **Chrome 134** | [134.0.6998.165](https://github.com/adryfish/fingerprint-chromium/tree/134.0.6998.165) | [Installer](https://github.com/adryfish/fingerprint-chromium/releases/download/134.0.6998.165/ungoogled-chromium_134.0.6998.165-1.1_installer_x64.exe) <br> [ZIP](https://github.com/adryfish/fingerprint-chromium/releases/download/134.0.6998.165/ungoogled-chromium_134.0.6998.165-1.1_windows_x64.zip) | [134.0.6998.165-1_linux.tar.xz](https://github.com/adryfish/fingerprint-chromium/releases/download/134.0.6998.165/ungoogled-chromium_134.0.6998.165-1_linux.tar.xz) | |
 | **Chrome 133** | [133.0.6943.126](https://github.com/adryfish/fingerprint-chromium/tree/133.0.6943.126) | [Installer](https://github.com/adryfish/fingerprint-chromium/releases/download/133.0.6943.126/ungoogled-chromium_133.0.6943.126-1.1_installer_x64.exe) <br> [ZIP](https://github.com/adryfish/fingerprint-chromium/releases/download/133.0.6943.126/ungoogled-chromium_133.0.6943.126-1.1_windows_x64.zip) | [133.0.6943.126-1_linux.tar.xz](https://github.com/adryfish/fingerprint-chromium/releases/download/133.0.6943.126/ungoogled-chromium_133.0.6943.126-1_linux.tar.xz) |  |
 | **Chrome 132**   | [132.0.6834.159](https://github.com/adryfish/fingerprint-chromium/tree/132.0.6834.159)               | [Installer](https://github.com/adryfish/fingerprint-chromium/releases/download/132.0.6834.159/ungoogled-chromium_132.0.6834.159-1.1_installer_x64.exe) <br> [ZIP](https://github.com/adryfish/fingerprint-chromium/releases/download/132.0.6834.159/ungoogled-chromium_132.0.6834.159-1.1_windows_x64.zip) | [ 132.0.6834.159-1_linux.tar.xz ](https://github.com/adryfish/fingerprint-chromium/releases/download/132.0.6834.159/ungoogled-chromium_132.0.6834.159-1_linux.tar.xz) | [132.0.6834.110-1.1_macos.dmg](https://github.com/adryfish/fingerprint-chromium/releases/download/132.0.6834.159/ungoogled-chromium_132.0.6834.110-1.1_macos.dmg) |
 
@@ -46,14 +47,15 @@ Access Claude's AI services seamlessly:
 
 | **Fingerprint**                 | **Description**                                                                                          | **Command Line Arguments**                                                      |
 |-----------------------------------------|----------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
-| **User-Agent**                          | Modify the browser's `User-Agent`, including `navigator.userAgent`, `navigator.platform`, `navigator.userAgentData`, and `Client Hints` | `--fingerprint-platform` <br>`--fingerprint-platform-version` <br>`--fingerprint-brand`(131+) <br>`--fingerprint-brand-version`(131+)                  |
+| **User-Agent**                          | Modify the browser's `User-Agent`, including `navigator.userAgent`, `navigator.platform`, `navigator.userAgentData`, and `Client Hints` | `--fingerprint-platform` <br>`--fingerprint-platform-version` <br>`--fingerprint-brand` <br>`--fingerprint-brand-version`                  |
 | **Audio**                | Obfuscate or spoof audio fingerprint data                                                                | `--fingerprint` (activated when fingerprint seed is enabled)                    |
 | **Plugin**               | Modify plugin-related features          | Removed in 133+, browser returns fixed plugin list, spoofing would expose rather than protect   |
 | **Hardware**             | Customize hardware parameters such as CPU cores and memory size                                          | `--fingerprint` <br> `--fingerprint-hardware-concurrency`                       |
+| **WebGPU Report**             | Modify GPU information including VENDOR and RENDERER (Linux only) | `--fingerprint`(activated when fingerprint seed is enabled)                     |
 | **Font**                 | Modify system font information                                                                           | `--fingerprint` (activated when fingerprint seed is enabled)                    |
-| **Canvas Image Data Noise**             | Add noise to canvas image data, modifying up to 10 pixels to interfere with fingerprinting               | `--fingerprint`(132+ effective)                                      |
-| **Canvas MeasureText Noise**            | Scale `Canvas::measureText()` output by a random factor between `-0.0003%` and `0.0003%`, recalculated at each document initialization | `--fingerprint`(132+ effective)       |
-| **ClientRects Noise**                   | Scale `getClientRects()` and `getBoundingClientRect()` output by a random factor between `-0.0003%` and `0.0003%`, recalculated at each document initialization | `--fingerprint`(132+ effective)  |
+| **Canvas Image Data Noise**             | Add noise to canvas image data, modifying up to 10 pixels to interfere with fingerprinting               | `--fingerprint`                                      |
+| **Canvas MeasureText Noise**            | Scale `Canvas::measureText()` output by a random factor between `-0.0003%` and `0.0003%`, recalculated at each document initialization | `--fingerprint`      |
+| **ClientRects Noise**                   | Scale `getClientRects()` and `getBoundingClientRect()` output by a random factor between `-0.0003%` and `0.0003%`, recalculated at each document initialization | `--fingerprint`  |
 | **WebRTC Policy**                       | Disable non-proxied UDP connections by default, preventing real IP address leaks via WebRTC              | `--disable-non-proxied-udp` (enabled by default)                                |
 | **Language Support**                    | Set the browser language and accepted languages                                                          | `--lang` (set browser language) <br> `--accept-lang` (set accepted languages)   |
 | **Timezone Support**                    | Set the browser timezone                                                                                 | `TZ` environment variable (e.g., `TZ=Asia/Shanghai`)                            |
@@ -126,7 +128,7 @@ chrome.exe --fingerprint=2023 --fingerprint-platform=macos --fingerprint-platfor
 
 Scan the QR code to join the QQ group to communicate with other users:
 
-<img src="qqgroup.png" alt="QQ Group QR code" width="300">
+<img src="qq-group.png" alt="QQ Group QR code" width="300">
 
 ## Credits
 

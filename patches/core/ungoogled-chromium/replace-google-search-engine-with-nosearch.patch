@@ -1,12 +1,9 @@
 --- a/third_party/search_engines_data/resources/definitions/prepopulated_engines.json
 +++ b/third_party/search_engines_data/resources/definitions/prepopulated_engines.json
-@@ -154,25 +154,11 @@
-     // TODO(crbug.com/343792225): Identify a way to resolve this problem and implement
-     // necessary changes.
-     "google": {
--      "name": "Google",
--      "keyword": "google.com",
--      "favicon_url": "https://www.google.com/images/branding/product/ico/googleg_alldp.ico",
+@@ -143,21 +143,13 @@
+       "name": "Google",
+       "keyword": "google.com",
+       "favicon_url": "https://www.google.com/images/branding/product/ico/googleg_alldp.ico",
 -      "search_url": "{google:baseURL}search?q={searchTerms}&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:language}{google:prefetchSource}{google:searchClient}{google:sourceId}{google:contextualSearchVersion}ie={inputEncoding}",
 -      "suggest_url": "{google:baseSuggestURL}search?{google:searchFieldtrialParameter}client={google:suggestClient}&gs_ri={google:suggestRid}&xssi=t&q={searchTerms}&{google:inputType}{google:omniboxFocusType}{google:cursorPosition}{google:currentPageUrl}{google:pageClassification}{google:clientCacheTimeToLive}{google:searchVersion}{google:sessionToken}{google:prefetchQuery}sugkey={google:suggestAPIKeyParameter}",
 -      "image_url": "{google:baseSearchByImageURL}upload",
@@ -16,24 +13,18 @@
 -      "image_translate_source_language_param_key": "sourcelang",
 -      "image_translate_target_language_param_key": "targetlang",
 -      "search_intent_params": ["si", "gs_ssp"],
--      "alternate_urls": [
++      "search_url": "https://www.google.com/search?q={searchTerms}&ie={inputEncoding}",
+       "alternate_urls": [
 -        "{google:baseURL}#q={searchTerms}",
 -        "{google:baseURL}search#q={searchTerms}",
 -        "{google:baseURL}webhp#q={searchTerms}",
 -        "{google:baseURL}s#q={searchTerms}",
 -        "{google:baseURL}s?q={searchTerms}"
--      ],
-+      "name": "Google",
-+      "keyword": "google.com",
-+      "favicon_url": "https://www.google.com/images/branding/product/ico/googleg_alldp.ico",
-+      "search_url": "https://www.google.com/search?q={searchTerms}&ie={inputEncoding}",
-+      "alternate_urls": [
 +        "https://www.google.com/#q={searchTerms}",
 +        "https://www.google.com/search#q={searchTerms}",
 +        "https://www.google.com/webhp#q={searchTerms}",
 +        "https://www.google.com/s#q={searchTerms}",
 +        "https://www.google.com/s?q={searchTerms}"
-+      ],
+       ],
        "type": "SEARCH_ENGINE_GOOGLE",
        "preconnect_to_search_url" : "ALLOWED",
-       "prefetch_likely_navigations" : "ALLOWED",

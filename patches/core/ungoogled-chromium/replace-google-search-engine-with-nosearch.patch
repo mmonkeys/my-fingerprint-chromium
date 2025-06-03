@@ -26,7 +26,7 @@
 +      "name": "Google",
 +      "keyword": "google.com",
 +      "favicon_url": "https://www.google.com/images/branding/product/ico/googleg_alldp.ico",
-+      "search_url": ""https://www.google.com/search?q={searchTerms}&ie={inputEncoding}",
++      "search_url": "https://www.google.com/search?q={searchTerms}&ie={inputEncoding}",
 +      "new_tab_url": "about:blank",
        "type": "SEARCH_ENGINE_GOOGLE",
        "preconnect_to_search_url" : "ALLOWED",

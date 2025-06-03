@@ -1,5 +1,5 @@
 diff --git a/third_party/blink/renderer/platform/fonts/font_cache.cc b/third_party/blink/renderer/platform/fonts/font_cache.cc
-index b3a4c782c6..c417182fbb 100644
+index b3a4c782c6..94b4ffbacb 100644
 --- a/third_party/blink/renderer/platform/fonts/font_cache.cc
 +++ b/third_party/blink/renderer/platform/fonts/font_cache.cc
 @@ -32,14 +32,17 @@
@@ -20,7 +20,17 @@ index b3a4c782c6..c417182fbb 100644
  #include "build/build_config.h"
  #include "skia/ext/font_utils.h"
  #include "third_party/blink/public/common/features.h"
-@@ -155,6 +158,46 @@ const FontPlatformData* FontCache::GetFontPlatformData(
+@@ -144,6 +147,9 @@ const FontPlatformData* FontCache::SystemFontPlatformData(
+ }
+ #endif
+ 
++// TODO
++// 目前是通过减少字体生成不同的指纹
++// 后面可能会虚构一些字体，通过链接到已有字体上来实现
+ const FontPlatformData* FontCache::GetFontPlatformData(
+     const FontDescription& font_description,
+     const FontFaceCreationParams& creation_params,
+@@ -155,6 +161,47 @@ const FontPlatformData* FontCache::GetFontPlatformData(
      PlatformInit();
    }
  
@@ -33,7 +43,10 @@ index b3a4c782c6..c417182fbb 100644
 +      "Times New Roman",
 +      "Courier New",
 +      "Georgia",
-+      "Verdana"
++      "Verdana",
++      // 解决中文乱码
++      "Microsoft YaHei",
++      "SimSun"
 +    };
 +
 +    if (creation_params.CreationType() == kCreateFontByFamily) {
@@ -50,15 +63,13 @@ index b3a4c782c6..c417182fbb 100644
 +      if (!is_basic_font) {
 +        // 获取fingerprint值作为种子
 +        std::string fingerprint = command_line->GetSwitchValueASCII(switches::kFingerprint);
-+        uint32_t seed;
-+        if (base::StringToUint(fingerprint, &seed)) {
-+          uint32_t hash = std::hash<String>{}(creation_params.Family());
-+          hash = hash ^ seed;  // 将fingerprint值混入hash
++        std::string combined = fingerprint + creation_params.Family().Utf8();
++        uint32_t hash = std::hash<std::string>{}(combined);
++        float probability = static_cast<float>(hash) / static_cast<float>(std::numeric_limits<uint32_t>::max());
 +
-+          // 50%概率不支持这个字体
-+          if (hash % 2 == 0) {
-+            return nullptr;  // 直接返回nullptr表示不支持该字体
-+          }
++        // 根据概率决定是否支持该字体
++        if (probability < 0.05) {
++          return nullptr;
 +        }
 +      }
 +    }
